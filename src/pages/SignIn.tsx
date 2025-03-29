@@ -28,7 +28,7 @@ const SignIn = () => {
       // For demo purposes, we'll just redirect to the dashboard
       toast({
         title: "Signed in successfully",
-        description: "Welcome back to VIT Bhopal Learniverse!",
+        description: "Welcome back to EDU-VIT!",
       });
       navigate("/dashboard");
     } catch (error) {
@@ -46,12 +46,10 @@ const SignIn = () => {
     <div className="min-h-screen flex flex-col ghibli-container">
       <header className="container mx-auto py-4 px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full bg-ghibli-sky-blue">
-            <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-              V
-            </div>
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
           </div>
-          <span className="font-bold text-lg">VIT Bhopal Learniverse</span>
+          <span className="font-bold text-lg">EDU-VIT</span>
         </Link>
         <ThemeToggle />
       </header>
@@ -132,9 +130,13 @@ const SignIn = () => {
         </div>
       </main>
 
-      {/* Studio Ghibli inspired decorative elements */}
-      <div className="leaf-decoration top-1/4 left-10 h-16 w-16 -rotate-12" style={{ backgroundImage: "url('/images/leaf1.png')" }}></div>
-      <div className="leaf-decoration bottom-1/4 right-10 h-12 w-12 rotate-12" style={{ backgroundImage: "url('/images/leaf2.png')" }}></div>
+      <div className="absolute right-0 bottom-0 w-1/3 h-1/3 opacity-20 pointer-events-none">
+        <img 
+          src="/lovable-uploads/d58e0b52-0b18-46b6-977c-57fd12ac6b04.png" 
+          alt="VIT Bhopal Campus" 
+          className="w-full h-full object-contain"
+        />
+      </div>
     </div>
   );
 };

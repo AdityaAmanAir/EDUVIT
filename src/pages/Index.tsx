@@ -8,12 +8,10 @@ const Index = () => {
     <div className="min-h-screen flex flex-col ghibli-container">
       <header className="container mx-auto py-4 px-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full bg-ghibli-sky-blue">
-            <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-              V
-            </div>
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
           </div>
-          <span className="font-bold text-lg">VIT Bhopal Learniverse</span>
+          <span className="font-bold text-lg">EDU-VIT</span>
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -28,16 +26,16 @@ const Index = () => {
 
       <main className="flex-1 container mx-auto px-4 py-8 md:py-16 flex flex-col items-center justify-center text-center">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-6">
+          <div className="mb-6 relative">
             <img 
-              src="/images/totoro.png" 
-              alt="Totoro mascot" 
-              className="h-40 md:h-56 mx-auto animate-float"
+              src="/lovable-uploads/5df6dd4d-4a32-4474-9680-4347151776a0.png" 
+              alt="VIT Bhopal Statue" 
+              className="h-64 md:h-80 mx-auto rounded-lg shadow-xl"
             />
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ghibli-deep-blue dark:text-ghibli-sky-blue">
-            Welcome to VIT Bhopal Learniverse
+            Welcome to EDU-VIT
           </h1>
           
           <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
@@ -92,7 +90,7 @@ const Index = () => {
       <footer className="container mx-auto py-6 px-4 border-t">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} VIT Bhopal Learniverse. All rights reserved.
+            &copy; {new Date().getFullYear()} EDU-VIT. All rights reserved.
           </p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link to="#" className="text-sm text-gray-500 hover:text-primary">Privacy Policy</Link>

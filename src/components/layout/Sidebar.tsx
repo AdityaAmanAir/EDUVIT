@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -68,12 +67,10 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 to="/dashboard"
                 className="flex items-center gap-2 font-semibold"
               >
-                <div className="relative h-6 w-6 overflow-hidden rounded-full bg-ghibli-sky-blue">
-                  <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-xs">
-                    V
-                  </div>
+                <div className="relative h-6 w-6 overflow-hidden rounded-full">
+                  <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
                 </div>
-                <span>VIT Bhopal</span>
+                <span>EDU-VIT</span>
               </Link>
               <Button
                 variant="ghost"
@@ -119,12 +116,10 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
               to="/dashboard"
               className="flex items-center gap-2 font-semibold"
             >
-              <div className="relative h-6 w-6 overflow-hidden rounded-full bg-ghibli-sky-blue">
-                <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-xs">
-                  V
-                </div>
+              <div className="relative h-6 w-6 overflow-hidden rounded-full">
+                <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
               </div>
-              <span>VIT Bhopal</span>
+              <span>EDU-VIT</span>
             </Link>
           </div>
           <ScrollArea className="flex-1">

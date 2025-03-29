@@ -34,7 +34,7 @@ const SignUp = () => {
       
       toast({
         title: "Account created successfully",
-        description: `Welcome to VIT Bhopal Learniverse as a ${role}!`,
+        description: `Welcome to EDU-VIT as a ${role}!`,
       });
       navigate("/dashboard");
     } catch (error) {
@@ -52,12 +52,10 @@ const SignUp = () => {
     <div className="min-h-screen flex flex-col ghibli-container">
       <header className="container mx-auto py-4 px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full bg-ghibli-sky-blue">
-            <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-              V
-            </div>
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
           </div>
-          <span className="font-bold text-lg">VIT Bhopal Learniverse</span>
+          <span className="font-bold text-lg">EDU-VIT</span>
         </Link>
         <ThemeToggle />
       </header>
@@ -66,7 +64,7 @@ const SignUp = () => {
         <div className="ghibli-card w-full max-w-md p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2">Create Account</h1>
-            <p className="text-gray-600 dark:text-gray-300">Join VIT Bhopal Learniverse today</p>
+            <p className="text-gray-600 dark:text-gray-300">Join EDU-VIT today</p>
           </div>
 
           <form onSubmit={handleSignUp} className="space-y-6">
@@ -174,9 +172,13 @@ const SignUp = () => {
         </div>
       </main>
 
-      {/* Studio Ghibli inspired decorative elements */}
-      <div className="leaf-decoration top-1/4 left-10 h-16 w-16 -rotate-12" style={{ backgroundImage: "url('/images/leaf1.png')" }}></div>
-      <div className="leaf-decoration bottom-1/4 right-10 h-12 w-12 rotate-12" style={{ backgroundImage: "url('/images/leaf2.png')" }}></div>
+      <div className="absolute left-0 bottom-0 w-1/3 h-1/3 opacity-20 pointer-events-none">
+        <img 
+          src="/lovable-uploads/9794d0af-4953-4b93-b70f-57552cdddeec.png" 
+          alt="VIT Bhopal Aerial View" 
+          className="w-full h-full object-contain"
+        />
+      </div>
     </div>
   );
 };

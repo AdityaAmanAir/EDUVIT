@@ -31,13 +31,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             <span className="sr-only">Toggle menu</span>
           </Button>
           <Link to="/dashboard" className="flex items-center gap-2">
-            <div className="relative h-8 w-8 overflow-hidden rounded-full bg-ghibli-sky-blue">
-              <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-                V
-              </div>
+            <div className="relative h-8 w-8 overflow-hidden rounded-full">
+              <img src="/lovable-uploads/370f0e45-9450-4d2a-8081-9a9f67c7f623.png" alt="VIT Logo" className="object-contain h-full w-full" />
             </div>
             <span className="hidden font-bold text-lg md:inline-block">
-              VIT Bhopal Learniverse
+              EDU-VIT
             </span>
           </Link>
         </div>
