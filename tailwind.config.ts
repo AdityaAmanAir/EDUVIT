@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				ghibli: {
+					"sky-blue": "#A8D8EA",
+					"soft-green": "#C3E8BD",
+					"pale-yellow": "#F9F7C9",
+					"soft-pink": "#F4BFBF",
+					"deep-blue": "#4A6670",
+					"forest-green": "#5A8F7B",
+					"warm-orange": "#E67E22",
+					"earthy-brown": "#8D6E63"
 				}
 			},
 			borderRadius: {
@@ -84,11 +95,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'sway': {
+					'0%, 100%': {
+						transform: 'rotate(-3deg)'
+					},
+					'50%': {
+						transform: 'rotate(3deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'sway': 'sway 6s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'ghibli-light': "url('/images/ghibli-light.jpg')",
+				'ghibli-dark': "url('/images/ghibli-dark.jpg')"
 			}
 		}
 	},
