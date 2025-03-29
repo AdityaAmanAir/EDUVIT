@@ -26,11 +26,11 @@ const Index = () => {
 
       <main className="flex-1 container mx-auto px-4 py-8 md:py-16 flex flex-col items-center justify-center text-center">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-6 relative">
+          <div className="mb-8 relative">
             <img 
               src="/lovable-uploads/5df6dd4d-4a32-4474-9680-4347151776a0.png" 
               alt="VIT Bhopal Statue" 
-              className="h-64 md:h-80 mx-auto rounded-lg shadow-xl"
+              className="h-80 md:h-96 w-full mx-auto rounded-lg shadow-xl object-cover"
             />
           </div>
           
