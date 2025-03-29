@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { FileText, MessageSquare, Robot, ArrowUpRight, Clock, Calendar } from "lucide-react";
+import { FileText, MessageSquare, Bot, ArrowUpRight, Clock, Calendar } from "lucide-react";
 
 const Assessment = () => {
   return (
@@ -222,7 +222,7 @@ const FeedbackTab = () => {
                 <div className="flex justify-between items-start">
                   <CardTitle>{feedback.title}</CardTitle>
                   <Badge className="bg-primary/20 text-primary">
-                    <Robot className="h-3 w-3 mr-1" />
+                    <Bot className="h-3 w-3 mr-1" />
                     AI Feedback
                   </Badge>
                 </div>
