@@ -13,11 +13,11 @@ const Layout = () => {
       <div className="flex flex-1">
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
         <main className="flex-1 p-4 md:p-6 ghibli-container">
-          <div className="absolute top-0 left-0 w-full h-full -z-20 opacity-15 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full -z-20 opacity-25 pointer-events-none">
             <img 
               src="/lovable-uploads/9794d0af-4953-4b93-b70f-57552cdddeec.png" 
               alt="VIT Bhopal Campus" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
             />
           </div>
           <Outlet />

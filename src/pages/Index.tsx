@@ -25,16 +25,17 @@ const Index = () => {
       </header>
 
       <main className="flex-1 container mx-auto px-4 py-8 md:py-16 flex flex-col items-center justify-center text-center">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-8 relative">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-10 relative rounded-xl overflow-hidden shadow-2xl">
             <img 
               src="/lovable-uploads/5df6dd4d-4a32-4474-9680-4347151776a0.png" 
               alt="VIT Bhopal Statue" 
-              className="h-80 md:h-96 w-full mx-auto rounded-lg shadow-xl object-cover"
+              className="h-96 md:h-[500px] w-full object-cover object-center"
             />
+            <div className="absolute inset-0 dark:bg-black/40 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ghibli-deep-blue dark:text-ghibli-sky-blue">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ghibli-deep-blue dark:text-ghibli-sky-blue dark:glow-pulse">
             Welcome to EDU-VIT
           </h1>
           
@@ -45,7 +46,7 @@ const Index = () => {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="ghibli-card p-6">
+            <div className="ghibli-card p-6 dark:glow-rose">
               <div className="text-ghibli-forest-green dark:text-ghibli-soft-green text-xl font-semibold mb-3">
                 For Students
               </div>
@@ -55,7 +56,7 @@ const Index = () => {
               </Button>
             </div>
             
-            <div className="ghibli-card p-6">
+            <div className="ghibli-card p-6 dark:glow-green">
               <div className="text-ghibli-deep-blue dark:text-ghibli-sky-blue text-xl font-semibold mb-3">
                 For Mentors
               </div>
@@ -67,19 +68,19 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="ghibli-card p-4">
+            <div className="ghibli-card p-4 dark:glow-rose">
               <h2 className="font-semibold mb-2">Personalized Learning</h2>
               <p className="text-sm">Study videos and materials tailored to your needs</p>
             </div>
-            <div className="ghibli-card p-4">
+            <div className="ghibli-card p-4 dark:glow-green">
               <h2 className="font-semibold mb-2">Gamified Learning</h2>
               <p className="text-sm">Fun quizzes with leaderboards for healthy competition</p>
             </div>
-            <div className="ghibli-card p-4">
+            <div className="ghibli-card p-4 dark:glow-rose">
               <h2 className="font-semibold mb-2">Smart Assessment</h2>
               <p className="text-sm">AI-powered feedback and personalized improvement tips</p>
             </div>
-            <div className="ghibli-card p-4">
+            <div className="ghibli-card p-4 dark:glow-green">
               <h2 className="font-semibold mb-2">Mental Well-being</h2>
               <p className="text-sm">Resources to support your mental health journey</p>
             </div>
@@ -99,11 +100,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-      
-      {/* Studio Ghibli inspired decorative elements */}
-      <div className="leaf-decoration top-1/4 left-10 h-16 w-16 -rotate-12" style={{ backgroundImage: "url('/images/leaf1.png')" }}></div>
-      <div className="leaf-decoration top-1/3 right-10 h-12 w-12 rotate-12" style={{ backgroundImage: "url('/images/leaf2.png')" }}></div>
-      <div className="leaf-decoration bottom-1/4 left-20 h-14 w-14 rotate-45" style={{ backgroundImage: "url('/images/leaf3.png')" }}></div>
     </div>
   );
 };

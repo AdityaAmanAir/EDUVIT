@@ -82,6 +82,10 @@
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 183 74% 28%;
+
+    /* Glow colors for dark mode */
+    --glow-rose: 346 77% 49%;
+    --glow-green: 142 71% 45%;
   }
 }
 
@@ -115,6 +119,38 @@
   
   .ghibli-card {
     @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-ghibli-sky-blue/20 dark:border-ghibli-deep-blue/20 rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+  }
+
+  /* Dynamic glow effects for dark mode */
+  .dark .glow-rose {
+    @apply relative;
+  }
+  
+  .dark .glow-rose::after {
+    @apply content-[''] absolute inset-0 rounded-xl opacity-30 blur-md -z-10;
+    box-shadow: 0 0 15px 2px hsl(var(--glow-rose));
+  }
+  
+  .dark .glow-green {
+    @apply relative;
+  }
+  
+  .dark .glow-green::after {
+    @apply content-[''] absolute inset-0 rounded-xl opacity-30 blur-md -z-10;
+    box-shadow: 0 0 15px 2px hsl(var(--glow-green));
+  }
+
+  .dark .glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow-pulse {
+    0% {
+      filter: brightness(1);
+    }
+    100% {
+      filter: brightness(1.3);
+    }
   }
   
   .leaf-decoration {

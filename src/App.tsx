@@ -21,7 +21,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="light" storageKey="vit-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="vit-ui-theme">
       <TooltipProvider>
         <Toaster />
         <Sonner />
