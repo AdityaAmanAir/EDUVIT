@@ -100,6 +100,135 @@ const Index = () => {
           </div>
         </div>
       </footer>
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-blue-500" />
+              Learning Resources
+            </CardTitle>
+            <CardDescription>
+              Access course materials, lectures, and study guides
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Explore an extensive library of educational resources carefully curated for VIT Bhopal students.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Link to="/learning" className="w-full">
+              <Button className="w-full">Explore Learning</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart className="h-5 w-5 text-green-500" />
+              Assessments
+            </CardTitle>
+            <CardDescription>
+              Test your knowledge with quizzes and practice tests
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Prepare for exams with practice assessments that mimic the real test environment.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Link to="/assessment" className="w-full">
+              <Button className="w-full">Take Assessment</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-amber-500" />
+              Gamified Learning
+            </CardTitle>
+            <CardDescription>
+              Make learning fun with games, challenges, and rewards
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Engage with interactive quizzes, climb leaderboards, earn badges, and compete with peers in a fun learning environment.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Link to="/gamified-learning" className="w-full">
+              <Button className="w-full bg-amber-500 hover:bg-amber-600">Gamified Learning</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Brain className="h-5 w-5 text-purple-500" />
+              Mental Health
+            </CardTitle>
+            <CardDescription>
+              Resources for mental wellbeing and stress management
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Access tools and support for maintaining good mental health during your academic journey.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Link to="/mental-health" className="w-full">
+              <Button className="w-full">Mental Health</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-indigo-500" />
+              Community
+            </CardTitle>
+            <CardDescription>
+              Connect with peers, mentors, and alumni
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Join discussion forums, participate in group studies, and network with the VIT Bhopal community.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full">Coming Soon</Button>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="h-5 w-5 text-red-500" />
+              Performance Tracking
+            </CardTitle>
+            <CardDescription>
+              Monitor your academic progress and performance
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Track your grades, attendance, and learning outcomes with comprehensive analytics.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full">Coming Soon</Button>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 };
