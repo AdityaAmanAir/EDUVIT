@@ -1,661 +1,564 @@
 
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { Heart, MessageSquare, Phone, BookOpen, Quote, Music, Video, Users } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar } from "@/components/ui/avatar";
+import { HeartPulse, Users, Smile, ExternalLink, Phone, Mail, Calendar, BookOpen } from "lucide-react";
 
 const MentalHealth = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold">Mental Health & Well-being</h1>
-        <p className="text-muted-foreground">
-          Resources and support for your mental well-being journey.
-        </p>
-      </div>
-      
-      <Tabs defaultValue="resources">
-        <TabsList className="grid w-full max-w-md grid-cols-4">
-          <TabsTrigger value="resources">Resources</TabsTrigger>
-          <TabsTrigger value="motivation">Motivation</TabsTrigger>
-          <TabsTrigger value="relax">Relax</TabsTrigger>
-          <TabsTrigger value="connect">Connect</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="resources" className="mt-6">
-          <ResourcesTab />
-        </TabsContent>
-        
-        <TabsContent value="motivation" className="mt-6">
-          <MotivationTab />
-        </TabsContent>
-        
-        <TabsContent value="relax" className="mt-6">
-          <RelaxTab />
-        </TabsContent>
-        
-        <TabsContent value="connect" className="mt-6">
-          <ConnectTab />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
-};
-
-const ResourcesTab = () => {
-  const resources = [
-    {
-      id: 1,
-      title: "Stress Management for Students",
-      description: "Learn effective techniques to manage academic stress and maintain balance.",
-      category: "Academic",
-      icon: BookOpen,
-      image: "/images/stress-management.jpg"
-    },
-    {
-      id: 2,
-      title: "Mindfulness for Better Focus",
-      description: "Discover how mindfulness practices can improve your concentration and retention.",
-      category: "Mindfulness",
-      icon: Heart,
-      image: "/images/mindfulness.jpg"
-    },
-    {
-      id: 3,
-      title: "Building Healthy Study Habits",
-      description: "Create sustainable study routines that support your well-being and academic success.",
-      category: "Academic",
-      icon: BookOpen,
-      image: "/images/study-habits.jpg"
-    },
-    {
-      id: 4,
-      title: "Dealing with Exam Anxiety",
-      description: "Practical strategies to overcome test anxiety and perform your best.",
-      category: "Mental Health",
-      icon: Heart,
-      image: "/images/exam-anxiety.jpg"
-    },
-    {
-      id: 5,
-      title: "Sleep and Learning",
-      description: "Understand the vital connection between quality sleep and academic performance.",
-      category: "Physical Health",
-      icon: Heart,
-      image: "/images/sleep.jpg"
-    },
-    {
-      id: 6,
-      title: "Social Connections in College",
-      description: "Building meaningful relationships while balancing academic responsibilities.",
-      category: "Social",
-      icon: Users,
-      image: "/images/social-connections.jpg"
-    }
-  ];
-  
-  const { toast } = useToast();
-  
-  return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {resources.map((resource) => (
-          <Card key={resource.id} className="ghibli-card overflow-hidden">
-            <div className="aspect-video bg-gray-100 dark:bg-gray-800 relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <resource.icon className="h-12 w-12 text-muted-foreground/50" />
-              </div>
-              <Badge className="absolute top-2 right-2">
-                {resource.category}
-              </Badge>
-            </div>
-            <CardHeader>
-              <CardTitle>{resource.title}</CardTitle>
-              <CardDescription>{resource.description}</CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Button 
-                className="w-full"
-                onClick={() => toast({
-                  title: "Resource Opened",
-                  description: `Opening ${resource.title}`,
-                })}
-              >
-                Read Article
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-      
-      <Card className="ghibli-card">
-        <CardHeader>
-          <CardTitle>Personalized Recommendations</CardTitle>
-          <CardDescription>Resources tailored to your needs</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">
-              Based on your recent activity and study patterns, we've selected these resources that might be helpful:
-            </p>
-            <ul className="list-disc list-inside space-y-1 text-sm">
-              <li>How to Maintain Focus During Long Study Sessions</li>
-              <li>Time Management Strategies for Multiple Assignments</li>
-              <li>Balancing Academics and Social Life</li>
-            </ul>
+    <div className="container mx-auto p-4">
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Mental Wellbeing</h1>
+            <p className="text-muted-foreground mt-1">Resources and support for your mental health journey</p>
           </div>
-        </CardContent>
-        <CardFooter>
-          <Button variant="outline" className="w-full">View Personalized Plan</Button>
-        </CardFooter>
-      </Card>
-      
-      <div className="flex justify-center">
-        <Button 
-          className="flex items-center gap-2"
-          onClick={() => toast({
-            title: "Counseling Services",
-            description: "Connecting you with campus counseling resources",
-          })}
-        >
-          <Phone className="h-4 w-4" />
-          Connect with Campus Counseling Services
-        </Button>
-      </div>
-    </div>
-  );
-};
-
-const MotivationTab = () => {
-  const quotes = [
-    {
-      text: "Education is the most powerful weapon which you can use to change the world.",
-      author: "Nelson Mandela"
-    },
-    {
-      text: "The beautiful thing about learning is that no one can take it away from you.",
-      author: "B.B. King"
-    },
-    {
-      text: "The more that you read, the more things you will know. The more that you learn, the more places you'll go.",
-      author: "Dr. Seuss"
-    },
-    {
-      text: "Live as if you were to die tomorrow. Learn as if you were to live forever.",
-      author: "Mahatma Gandhi"
-    },
-    {
-      text: "The mind is not a vessel to be filled, but a fire to be kindled.",
-      author: "Plutarch"
-    },
-    {
-      text: "The future belongs to those who believe in the beauty of their dreams.",
-      author: "Eleanor Roosevelt"
-    },
-  ];
-  
-  const [currentQuote, setCurrentQuote] = useState(0);
-  
-  const nextQuote = () => {
-    setCurrentQuote((prev) => (prev + 1) % quotes.length);
-  };
-  
-  const prevQuote = () => {
-    setCurrentQuote((prev) => (prev - 1 + quotes.length) % quotes.length);
-  };
-  
-  return (
-    <div className="space-y-8">
-      <Card className="ghibli-card">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Quote className="h-5 w-5 text-primary" />
-            Daily Inspiration
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="text-center py-8">
-          <blockquote className="italic text-xl mb-4">
-            "{quotes[currentQuote].text}"
-          </blockquote>
-          <p className="text-right font-medium">— {quotes[currentQuote].author}</p>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={prevQuote}>Previous</Button>
-          <Button variant="outline" onClick={nextQuote}>Next Quote</Button>
-        </CardFooter>
-      </Card>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle>Success Stories</CardTitle>
-            <CardDescription>From VIT Bhopal alumni</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="border-l-4 border-primary pl-4 py-2">
-              <p className="italic text-sm text-muted-foreground mb-2">
-                "The challenges I faced at VIT Bhopal prepared me for my career in ways I couldn't imagine. The perseverance I learned here was invaluable."
-              </p>
-              <p className="text-sm font-medium">— Priya Sharma, Software Engineer at Google</p>
-            </div>
-            <div className="border-l-4 border-primary pl-4 py-2">
-              <p className="italic text-sm text-muted-foreground mb-2">
-                "My time at VIT Bhopal taught me to balance academic excellence with personal well-being. This balance has been key to my success."
-              </p>
-              <p className="text-sm font-medium">— Arjun Patel, Entrepreneur</p>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full">More Success Stories</Button>
-          </CardFooter>
-        </Card>
-        
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle>Motivational Videos</CardTitle>
-            <CardDescription>Quick boosts of inspiration</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="border rounded-md p-3 flex gap-3 items-center">
-                <div className="flex-shrink-0 w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                  <Video className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm">Overcoming Academic Challenges</h3>
-                  <p className="text-xs text-muted-foreground">5:23 • Dr. Anjali Mehta</p>
-                </div>
-              </div>
-              
-              <div className="border rounded-md p-3 flex gap-3 items-center">
-                <div className="flex-shrink-0 w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                  <Video className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm">Finding Your Purpose in Education</h3>
-                  <p className="text-xs text-muted-foreground">7:15 • Prof. Raj Kumar</p>
-                </div>
-              </div>
-              
-              <div className="border rounded-md p-3 flex gap-3 items-center">
-                <div className="flex-shrink-0 w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                  <Video className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm">The Power of Persistence</h3>
-                  <p className="text-xs text-muted-foreground">4:45 • Alisha Singh, Alumni</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-      
-      <Card className="ghibli-card">
-        <CardHeader>
-          <CardTitle>Your Journal</CardTitle>
-          <CardDescription>Record your thoughts and reflections</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            placeholder="Write your thoughts here..."
-            className="min-h-[150px]"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button className="ml-auto">Save Entry</Button>
-        </CardFooter>
-      </Card>
-    </div>
-  );
-};
-
-const RelaxTab = () => {
-  const animations = [
-    { id: 1, title: "Totoro's Forest", description: "A peaceful walk through a magical forest" },
-    { id: 2, title: "Spirited Away Journey", description: "Relaxing scenes from the spirit world" },
-    { id: 3, title: "Howl's Moving Castle", description: "Calming moments with Sophie and Howl" },
-  ];
-  
-  const musicTracks = [
-    { id: 1, title: "Ghibli Piano Collection", artist: "Joe Hisaishi", duration: "5:20" },
-    { id: 2, title: "Relaxing Study Mix", artist: "Study Beats", duration: "4:45" },
-    { id: 3, title: "Nature Sounds: Rainfall", artist: "Nature Recordings", duration: "10:00" },
-    { id: 4, title: "Classical Focus", artist: "Mozart", duration: "6:30" },
-  ];
-  
-  const { toast } = useToast();
-  
-  return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Studio Ghibli Animations</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {animations.map((animation) => (
-            <Card key={animation.id} className="ghibli-card overflow-hidden">
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                {/* This would be an animated GIF or video in a real application */}
-                <div className="text-muted-foreground">
-                  {animation.title} Preview
-                </div>
-              </div>
-              <CardHeader>
-                <CardTitle>{animation.title}</CardTitle>
-                <CardDescription>{animation.description}</CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Button 
-                  className="w-full"
-                  onClick={() => toast({
-                    title: "Animation Started",
-                    description: `Now playing: ${animation.title}`,
-                  })}
-                >
-                  Watch Animation
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+          <Button className="mt-2 md:mt-0">
+            <HeartPulse className="mr-2 h-4 w-4" />
+            Book Appointment
+          </Button>
         </div>
-      </div>
-      
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Relaxing Music</h2>
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Music className="h-5 w-5 text-primary" />
-              Study & Relaxation Playlist
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {musicTracks.map((track) => (
-                <div
-                  key={track.id}
-                  className="flex items-center justify-between p-3 rounded-md hover:bg-muted/50 cursor-pointer"
-                  onClick={() => toast({
-                    title: "Now Playing",
-                    description: `${track.title} by ${track.artist}`,
-                  })}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 bg-primary/20 rounded-full flex items-center justify-center">
-                      <Music className="h-4 w-4" />
+
+        <Tabs defaultValue="resources" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="resources">Resources</TabsTrigger>
+            <TabsTrigger value="support">Support Services</TabsTrigger>
+            <TabsTrigger value="wellness">Wellness Tips</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="resources" className="space-y-4 mt-4">
+            <ScrollArea className="h-[calc(100vh-250px)]">
+              <div className="space-y-4 pr-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Understanding Mental Health</CardTitle>
+                    <CardDescription>Key concepts and research-backed information</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>What is mental health?</AccordionTrigger>
+                        <AccordionContent>
+                          Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make choices. Mental health is important at every stage of life, from childhood and adolescence through adulthood.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger>Common mental health challenges for students</AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="list-disc pl-6 space-y-2">
+                            <li><span className="font-medium">Academic stress:</span> Pressure to perform well, heavy workload, and fear of failure</li>
+                            <li><span className="font-medium">Anxiety:</span> Excessive worry about exams, presentations, or social situations</li>
+                            <li><span className="font-medium">Depression:</span> Persistent feelings of sadness, hopelessness, or lack of motivation</li>
+                            <li><span className="font-medium">Burnout:</span> Physical and emotional exhaustion from prolonged stress</li>
+                            <li><span className="font-medium">Social isolation:</span> Difficulty building connections, especially for international students</li>
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-3">
+                        <AccordionTrigger>How to recognize warning signs</AccordionTrigger>
+                        <AccordionContent>
+                          <p>Look out for these potential warning signs:</p>
+                          <ul className="list-disc pl-6 space-y-2 mt-2">
+                            <li>Persistent feelings of sadness or emptiness</li>
+                            <li>Withdrawal from friends, family, and regular activities</li>
+                            <li>Significant changes in eating or sleeping patterns</li>
+                            <li>Difficulty concentrating or making decisions</li>
+                            <li>Unexplained physical problems like headaches or stomach pain</li>
+                            <li>Increased use of alcohol or drugs</li>
+                            <li>Thoughts of self-harm or suicide</li>
+                          </ul>
+                          <p className="mt-3 text-muted-foreground">If you or someone you know is experiencing these signs, please reach out for professional help.</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Online Learning Resources</CardTitle>
+                    <CardDescription>Free courses and educational materials</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <Card className="overflow-hidden">
+                        <div className="p-6">
+                          <BookOpen className="h-8 w-8 mb-2 text-primary" />
+                          <h3 className="text-xl font-medium">Coursera: Mind Control</h3>
+                          <p className="text-sm text-muted-foreground mt-1">Learn how to manage stress and build resilience through mindfulness techniques</p>
+                        </div>
+                        <div className="bg-muted p-4 flex justify-between items-center">
+                          <span className="text-sm font-medium">Free course</span>
+                          <Button variant="outline" size="sm" className="h-8">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Access
+                          </Button>
+                        </div>
+                      </Card>
+
+                      <Card className="overflow-hidden">
+                        <div className="p-6">
+                          <BookOpen className="h-8 w-8 mb-2 text-primary" />
+                          <h3 className="text-xl font-medium">Udemy: Student Mental Health</h3>
+                          <p className="text-sm text-muted-foreground mt-1">Comprehensive guide to maintaining mental wellbeing during academic life</p>
+                        </div>
+                        <div className="bg-muted p-4 flex justify-between items-center">
+                          <span className="text-sm font-medium">Free access</span>
+                          <Button variant="outline" size="sm" className="h-8">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Access
+                          </Button>
+                        </div>
+                      </Card>
                     </div>
-                    <div>
-                      <p className="font-medium text-sm">{track.title}</p>
-                      <p className="text-xs text-muted-foreground">{track.artist}</p>
-                    </div>
-                  </div>
-                  <div className="text-sm text-muted-foreground">{track.duration}</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full">View Full Playlist</Button>
-          </CardFooter>
-        </Card>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle>Breathing Exercises</CardTitle>
-            <CardDescription>Quick techniques to reduce stress</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center py-6">
-            <div className="w-32 h-32 mx-auto rounded-full bg-primary/20 relative mb-4">
-              <div className="absolute inset-0 animate-pulse bg-primary/20 rounded-full"></div>
-              <div className="absolute inset-3 bg-background rounded-full flex items-center justify-center">
-                <p className="text-sm">Breathe with me</p>
-              </div>
-            </div>
-            <p className="text-muted-foreground text-sm">
-              Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full">Try Different Patterns</Button>
-          </CardFooter>
-        </Card>
-        
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle>Stress Relief Games</CardTitle>
-            <CardDescription>Take a quick mental break</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <Button
-                variant="outline" 
-                className="h-24 flex flex-col gap-2"
-                onClick={() => toast({
-                  title: "Game Starting",
-                  description: "Loading Zen Garden...",
-                })}
-              >
-                <div className="h-8 w-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                  <span className="text-green-500 dark:text-green-300 text-lg">🌿</span>
-                </div>
-                <span>Zen Garden</span>
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="h-24 flex flex-col gap-2"
-                onClick={() => toast({
-                  title: "Game Starting",
-                  description: "Loading Bubble Pop...",
-                })}
-              >
-                <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                  <span className="text-blue-500 dark:text-blue-300 text-lg">🫧</span>
-                </div>
-                <span>Bubble Pop</span>
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="h-24 flex flex-col gap-2"
-                onClick={() => toast({
-                  title: "Game Starting",
-                  description: "Loading Coloring Book...",
-                })}
-              >
-                <div className="h-8 w-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                  <span className="text-purple-500 dark:text-purple-300 text-lg">🎨</span>
-                </div>
-                <span>Coloring Book</span>
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="h-24 flex flex-col gap-2"
-                onClick={() => toast({
-                  title: "Game Starting",
-                  description: "Loading Memory Cards...",
-                })}
-              >
-                <div className="h-8 w-8 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center">
-                  <span className="text-amber-500 dark:text-amber-300 text-lg">🃏</span>
-                </div>
-                <span>Memory Cards</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-};
 
-const ConnectTab = () => {
-  const communityGroups = [
-    { id: 1, name: "Study Buddies", members: 56, description: "Find partners for focused study sessions" },
-    { id: 2, name: "Mindfulness Club", members: 34, description: "Practice meditation and mindfulness together" },
-    { id: 3, name: "Stress Relief Squad", members: 42, description: "Share tips and support for managing stress" },
-    { id: 4, name: "CS Coding Group", members: 28, description: "Collaborate on programming projects and challenges" }
-  ];
-  
-  const upcomingEvents = [
-    { 
-      id: 1, 
-      title: "Wellness Wednesday", 
-      date: "2023-10-25", 
-      time: "18:00", 
-      type: "Virtual",
-      description: "Join our virtual meetup for guided meditation and relaxation techniques."
-    },
-    {
-      id: 2,
-      title: "Study Sprint",
-      date: "2023-10-27",
-      time: "15:00",
-      type: "In-person",
-      description: "Two-hour focused study session with breaks and snacks provided."
-    },
-    {
-      id: 3,
-      title: "Exam Prep Support",
-      date: "2023-11-02",
-      time: "19:00",
-      type: "Hybrid",
-      description: "Get tips and emotional support as we approach midterm exams."
-    }
-  ];
-  
-  const { toast } = useToast();
-  const [message, setMessage] = useState("");
-  
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      toast({
-        title: "Message Sent",
-        description: "Your message has been sent to the community.",
-      });
-      setMessage("");
-    }
-  };
-  
-  return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="ghibli-card lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-primary" />
-              Community Chat
-            </CardTitle>
-            <CardDescription>Connect with fellow students in real-time</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="border rounded-md h-[300px] mb-4 p-4 overflow-y-auto bg-muted/30">
-              {/* Chat messages would appear here in a real app */}
-              <div className="text-center text-muted-foreground">
-                <p>Welcome to the community chat!</p>
-                <p className="text-sm mt-2">Start sending messages to connect with others.</p>
+                    <Card className="p-6">
+                      <h3 className="text-xl font-medium">Recommended Books & Articles</h3>
+                      <div className="mt-4 space-y-3">
+                        <div className="flex items-start gap-3">
+                          <BookOpen className="h-5 w-5 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">Why We Sleep by Matthew Walker</p>
+                            <p className="text-sm text-muted-foreground">Explores the critical role of sleep in cognitive function and mental health</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <BookOpen className="h-5 w-5 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">Atomic Habits by James Clear</p>
+                            <p className="text-sm text-muted-foreground">Learn how to build good habits and break bad ones</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <BookOpen className="h-5 w-5 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">The Happiness Trap by Russ Harris</p>
+                            <p className="text-sm text-muted-foreground">Introduction to ACT (Acceptance and Commitment Therapy)</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Digital Tools & Apps</CardTitle>
+                    <CardDescription>Applications to support your mental wellbeing</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Headspace</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Guided meditation and mindfulness exercises</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Calm</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Sleep stories, meditation, and relaxation</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Woebot</h3>
+                        <p className="text-sm text-muted-foreground mt-1">AI-based cognitive behavioral therapy</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Daylio</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Mood tracking and journaling app</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Forest</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Focus time and digital wellbeing</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Todoist</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Task management to reduce cognitive load</p>
+                        <Button variant="link" className="p-0 h-auto mt-2 text-primary">Learn more</Button>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            </div>
-            <div className="flex gap-2">
-              <Textarea
-                placeholder="Type your message here..."
-                className="resize-none"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <Button onClick={handleSendMessage}>Send</Button>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="ghibli-card">
-          <CardHeader>
-            <CardTitle>Join a Voice Call</CardTitle>
-            <CardDescription>Talk with others in real-time</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <div className="py-8 space-y-6">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
-                <Phone className="h-8 w-8 text-primary" />
+            </ScrollArea>
+          </TabsContent>
+
+          <TabsContent value="support" className="space-y-4 mt-4">
+            <ScrollArea className="h-[calc(100vh-250px)]">
+              <div className="space-y-4 pr-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>VIT Bhopal Counseling Services</CardTitle>
+                    <CardDescription>Professional support available on campus</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p>VIT Bhopal offers free, confidential counseling services to all students. Our professional counselors can help with:</p>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Academic stress</li>
+                      <li>Adjustment issues</li>
+                      <li>Relationship concerns</li>
+                      <li>Anxiety and depression</li>
+                      <li>Time management and study skills</li>
+                      <li>Self-esteem and confidence</li>
+                    </ul>
+
+                    <div className="bg-muted rounded-lg p-4 mt-4">
+                      <h3 className="font-medium text-lg">Contact Information</h3>
+                      <div className="space-y-2 mt-2">
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-4 w-4 text-muted-foreground" />
+                          <span>counseling@vitbhopal.ac.in</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Phone className="h-4 w-4 text-muted-foreground" />
+                          <span>+91 xxx-xxx-xxxx</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4 text-muted-foreground" />
+                          <span>Monday-Friday, 9:00 AM - 5:00 PM</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 flex flex-col sm:flex-row gap-4">
+                      <Card className="flex-1 p-4">
+                        <div className="flex items-center gap-4">
+                          <Avatar className="h-10 w-10">
+                            <div className="flex h-full w-full items-center justify-center bg-primary text-primary-foreground">
+                              DR
+                            </div>
+                          </Avatar>
+                          <div>
+                            <h4 className="font-medium">Dr. Ravi Kumar</h4>
+                            <p className="text-sm text-muted-foreground">Head Counselor</p>
+                          </div>
+                        </div>
+                      </Card>
+                      <Card className="flex-1 p-4">
+                        <div className="flex items-center gap-4">
+                          <Avatar className="h-10 w-10">
+                            <div className="flex h-full w-full items-center justify-center bg-primary text-primary-foreground">
+                              SM
+                            </div>
+                          </Avatar>
+                          <div>
+                            <h4 className="font-medium">Ms. Sonia Mehta</h4>
+                            <p className="text-sm text-muted-foreground">Wellness Counselor</p>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>24/7 Helplines & Crisis Support</CardTitle>
+                    <CardDescription>Emergency resources when you need immediate help</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg p-4">
+                        <h3 className="text-red-700 dark:text-red-400 font-medium">If you're experiencing a mental health emergency:</h3>
+                        <p className="text-sm mt-1">If you or someone you know is in immediate danger, call emergency services: <span className="font-bold">112</span></p>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <Card className="p-4">
+                          <h3 className="font-medium">TISS iCall</h3>
+                          <p className="text-sm text-muted-foreground mt-1">Psychosocial helpline that offers counseling by trained professionals</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <Phone className="h-4 w-4" />
+                            <span>+91-9152987821</span>
+                          </div>
+                        </Card>
+                        <Card className="p-4">
+                          <h3 className="font-medium">Vandrevala Foundation</h3>
+                          <p className="text-sm text-muted-foreground mt-1">24/7 mental health helpline and support</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <Phone className="h-4 w-4" />
+                            <span>+91-9999666555</span>
+                          </div>
+                        </Card>
+                        <Card className="p-4">
+                          <h3 className="font-medium">AASRA</h3>
+                          <p className="text-sm text-muted-foreground mt-1">24-hour crisis intervention and suicide prevention</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <Phone className="h-4 w-4" />
+                            <span>+91-9820466726</span>
+                          </div>
+                        </Card>
+                        <Card className="p-4">
+                          <h3 className="font-medium">Mann Samvad</h3>
+                          <p className="text-sm text-muted-foreground mt-1">National mental health helpline</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <Phone className="h-4 w-4" />
+                            <span>14416</span>
+                          </div>
+                        </Card>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Peer Support Groups</CardTitle>
+                    <CardDescription>Connect with others who understand what you're going through</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Card className="p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-primary" />
+                        <h3 className="font-medium">VIT Mental Health Collective</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-2">Student-led support group that meets weekly to discuss mental health challenges and share coping strategies.</p>
+                      <div className="mt-3 flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        <span>Thursdays, 5:30 PM - Academic Block, Room 204</span>
+                      </div>
+                    </Card>
+
+                    <Card className="p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-primary" />
+                        <h3 className="font-medium">Anxiety Management Group</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-2">Focused on sharing and learning techniques to manage anxiety, especially around exams and presentations.</p>
+                      <div className="mt-3 flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        <span>Tuesdays, 4:00 PM - Student Center</span>
+                      </div>
+                    </Card>
+
+                    <Card className="p-4">
+                      <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-primary" />
+                        <h3 className="font-medium">International Students Circle</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-2">Support group for international students dealing with cultural adjustment, homesickness, and academic pressure.</p>
+                      <div className="mt-3 flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        <span>Fridays, 6:00 PM - International Student Office</span>
+                      </div>
+                    </Card>
+                  </CardContent>
+                </Card>
               </div>
-              <div>
-                <p className="font-medium">Connect with others</p>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Join a voice channel to talk with other students
-                </p>
-                <Button 
-                  className="w-full"
-                  onClick={() => toast({
-                    title: "Voice Channel",
-                    description: "Connecting to voice channel...",
-                  })}
-                >
-                  Join Voice Channel
-                </Button>
+            </ScrollArea>
+          </TabsContent>
+
+          <TabsContent value="wellness" className="space-y-4 mt-4">
+            <ScrollArea className="h-[calc(100vh-250px)]">
+              <div className="space-y-4 pr-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Daily Mental Wellness Practices</CardTitle>
+                    <CardDescription>Simple habits to improve your mental wellbeing</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Mindfulness Meditation</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Start with just 5 minutes daily of focused breathing to reduce stress and improve concentration.</p>
+                          </div>
+                        </div>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Gratitude Journal</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Write down three things you're grateful for each day to shift focus to the positive aspects of life.</p>
+                          </div>
+                        </div>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Regular Physical Activity</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Even a 20-minute walk can boost your mood by releasing endorphins and reducing stress hormones.</p>
+                          </div>
+                        </div>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Digital Detox</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Set aside time each day to disconnect from devices and social media to reduce anxiety and improve sleep.</p>
+                          </div>
+                        </div>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Sleep Hygiene</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Maintain a regular sleep schedule and create a relaxing bedtime routine to improve sleep quality.</p>
+                          </div>
+                        </div>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <div className="flex items-start gap-3">
+                          <div className="bg-primary/10 rounded-full p-2 mt-1">
+                            <Smile className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">Social Connection</h3>
+                            <p className="text-sm text-muted-foreground mt-1">Schedule time with friends or family, even briefly, to maintain social connections that support mental health.</p>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Stress Management Techniques</CardTitle>
+                    <CardDescription>Effective strategies for managing academic stress</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="breathing">
+                        <AccordionTrigger>Deep Breathing Exercises</AccordionTrigger>
+                        <AccordionContent>
+                          <p>Try the 4-7-8 breathing technique:</p>
+                          <ol className="list-decimal pl-6 space-y-2 mt-2">
+                            <li>Exhale completely through your mouth</li>
+                            <li>Close your mouth and inhale quietly through your nose to a mental count of 4</li>
+                            <li>Hold your breath for a count of 7</li>
+                            <li>Exhale completely through your mouth to a count of 8</li>
+                            <li>Repeat the cycle three more times</li>
+                          </ol>
+                          <p className="mt-3">Practice this technique twice daily or whenever you feel stressed.</p>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="progressive">
+                        <AccordionTrigger>Progressive Muscle Relaxation</AccordionTrigger>
+                        <AccordionContent>
+                          <p>This technique involves tensing and then releasing different muscle groups:</p>
+                          <ol className="list-decimal pl-6 space-y-2 mt-2">
+                            <li>Find a quiet, comfortable place to sit or lie down</li>
+                            <li>Take a few deep breaths</li>
+                            <li>Start with your feet: tense the muscles for 5 seconds, then release and relax for 10 seconds</li>
+                            <li>Move up through your body: calves, thighs, abdomen, chest, arms, hands, shoulders, neck, and face</li>
+                            <li>Notice the difference between tension and relaxation</li>
+                          </ol>
+                          <p className="mt-3">This exercise helps reduce physical manifestations of stress and induces a calming response.</p>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="pomodoro">
+                        <AccordionTrigger>The Pomodoro Technique</AccordionTrigger>
+                        <AccordionContent>
+                          <p>A time management method that can reduce academic stress:</p>
+                          <ol className="list-decimal pl-6 space-y-2 mt-2">
+                            <li>Choose a task you need to accomplish</li>
+                            <li>Set a timer for 25 minutes and work on the task until the timer rings</li>
+                            <li>Take a short 5-minute break</li>
+                            <li>Repeat the process</li>
+                            <li>After four cycles, take a longer break (15-30 minutes)</li>
+                          </ol>
+                          <p className="mt-3">This technique helps maintain focus, prevents burnout, and makes large tasks more manageable.</p>
+                        </AccordionContent>
+                      </AccordionItem>
+
+                      <AccordionItem value="visualization">
+                        <AccordionTrigger>Guided Visualization</AccordionTrigger>
+                        <AccordionContent>
+                          <p>A powerful technique to reduce stress and anxiety:</p>
+                          <ol className="list-decimal pl-6 space-y-2 mt-2">
+                            <li>Find a quiet place and close your eyes</li>
+                            <li>Take several deep breaths</li>
+                            <li>Imagine a peaceful scene (beach, forest, mountains)</li>
+                            <li>Engage all your senses: What do you see, hear, smell, feel?</li>
+                            <li>Spend 5-10 minutes immersed in this mental sanctuary</li>
+                          </ol>
+                          <p className="mt-3">This practice can quickly reduce stress hormones and provide mental relief during challenging times.</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Healthy Lifestyle Habits</CardTitle>
+                    <CardDescription>Physical wellbeing supports mental health</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Nutrition for Brain Health</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Foods that support cognitive function and mood regulation:</p>
+                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
+                          <li><span className="font-medium">Omega-3 fatty acids:</span> Fatty fish, flaxseeds, walnuts</li>
+                          <li><span className="font-medium">Antioxidants:</span> Colorful fruits and vegetables</li>
+                          <li><span className="font-medium">Complex carbohydrates:</span> Whole grains, legumes</li>
+                          <li><span className="font-medium">Protein:</span> Lean meats, beans, nuts, dairy</li>
+                          <li><span className="font-medium">Hydration:</span> Aim for 2-3 liters of water daily</li>
+                        </ul>
+                      </Card>
+
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Exercise for Mental Wellbeing</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Regular physical activity is one of the most effective ways to improve mental health:</p>
+                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
+                          <li>Aim for at least 150 minutes of moderate activity per week</li>
+                          <li>Include both cardio (walking, swimming) and strength training</li>
+                          <li>Yoga combines physical activity with mindfulness benefits</li>
+                          <li>Even brief walks between classes can boost mood and energy</li>
+                          <li>VIT Bhopal's sports facilities are available for all students</li>
+                        </ul>
+                      </Card>
+
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">Sleep Optimization</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Quality sleep is essential for mental health and academic performance:</p>
+                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
+                          <li>Aim for 7-9 hours of sleep per night</li>
+                          <li>Maintain a consistent sleep schedule, even on weekends</li>
+                          <li>Create a relaxing bedtime routine</li>
+                          <li>Avoid screens 1 hour before bed</li>
+                          <li>Keep your sleep environment cool, dark, and quiet</li>
+                          <li>Limit caffeine after 2 PM</li>
+                        </ul>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-      
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Community Groups</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {communityGroups.map((group) => (
-            <Card key={group.id} className="ghibli-card">
-              <CardHeader className="pb-3">
-                <CardTitle>{group.name}</CardTitle>
-                <CardDescription>{group.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-sm text-muted-foreground">
-                  {group.members} members
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full" variant="outline">Join Group</Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </div>
-      
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Upcoming Events</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {upcomingEvents.map((event) => (
-            <Card key={event.id} className="ghibli-card">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <CardTitle>{event.title}</CardTitle>
-                  <Badge>{event.type}</Badge>
-                </div>
-                <CardDescription>
-                  {new Date(`${event.date}T${event.time}`).toLocaleString(undefined, {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit"
-                  })}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{event.description}</p>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button variant="outline">More Info</Button>
-                <Button>RSVP</Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+            </ScrollArea>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
