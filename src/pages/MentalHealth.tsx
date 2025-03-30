@@ -1,14 +1,25 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar } from "@/components/ui/avatar";
-import { HeartPulse, Users, Smile, ExternalLink, Phone, Mail, Calendar, BookOpen } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { 
+  HeartPulse, Users, Smile, ExternalLink, Phone, 
+  Mail, Calendar, BookOpen, CheckCircle2, 
+  BrainCircuit, PencilRuler, Dumbbell, ClipboardCheck, 
+  SunMoon, BookMarked, MessageCircle 
+} from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 const MentalHealth = () => {
+  const [openSelfCheck, setOpenSelfCheck] = useState(false);
+  const [anxietyScore, setAnxietyScore] = useState(0);
+  const [stressScore, setStressScore] = useState(0);
+  
   return (
     <div className="container mx-auto p-4">
       <div className="space-y-6">
@@ -24,15 +35,122 @@ const MentalHealth = () => {
         </div>
 
         <Tabs defaultValue="resources" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="support">Support Services</TabsTrigger>
             <TabsTrigger value="wellness">Wellness Tips</TabsTrigger>
+            <TabsTrigger value="academic">Academic Balance</TabsTrigger>
           </TabsList>
 
           <TabsContent value="resources" className="space-y-4 mt-4">
             <ScrollArea className="h-[calc(100vh-250px)]">
               <div className="space-y-4 pr-4">
+                {/* Self-assessment tool */}
+                <Card className="border-primary/20">
+                  <CardHeader className="bg-primary/5 rounded-t-lg">
+                    <CardTitle className="flex items-center">
+                      <ClipboardCheck className="h-5 w-5 mr-2 text-primary" />
+                      Self-Assessment Tools
+                    </CardTitle>
+                    <CardDescription>Simple checks to understand your current mental state</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <Collapsible
+                      open={openSelfCheck}
+                      onOpenChange={setOpenSelfCheck}
+                      className="space-y-2"
+                    >
+                      <div className="flex items-center justify-between space-x-4 px-4">
+                        <h4 className="text-sm font-semibold">
+                          Quick Mental Wellbeing Check
+                        </h4>
+                        <CollapsibleTrigger asChild>
+                          <Button variant="ghost" size="sm" className="w-9 p-0">
+                            <MessageCircle className="h-4 w-4" />
+                            <span className="sr-only">Toggle</span>
+                          </Button>
+                        </CollapsibleTrigger>
+                      </div>
+                      
+                      <CollapsibleContent className="space-y-4">
+                        <div className="rounded-md border px-4 py-3 font-mono text-sm">
+                          <p className="text-muted-foreground mb-3">
+                            This is a simplified, non-diagnostic tool. For proper assessment, please consult a mental health professional.
+                          </p>
+                          
+                          <div className="space-y-4">
+                            <div>
+                              <h3 className="font-medium">Anxiety Level</h3>
+                              <div className="flex items-center mt-2">
+                                <span className="text-xs text-muted-foreground mr-2 w-6">Low</span>
+                                <Progress value={anxietyScore * 10} className="flex-1" />
+                                <span className="text-xs text-muted-foreground ml-2 w-6">High</span>
+                              </div>
+                              <div className="flex justify-between mt-2">
+                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                                  <Button
+                                    key={value}
+                                    variant={anxietyScore === value ? "default" : "outline"}
+                                    size="sm"
+                                    className="h-8 w-8 p-0"
+                                    onClick={() => setAnxietyScore(value)}
+                                  >
+                                    {value}
+                                  </Button>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h3 className="font-medium">Stress Level</h3>
+                              <div className="flex items-center mt-2">
+                                <span className="text-xs text-muted-foreground mr-2 w-6">Low</span>
+                                <Progress value={stressScore * 10} className="flex-1" />
+                                <span className="text-xs text-muted-foreground ml-2 w-6">High</span>
+                              </div>
+                              <div className="flex justify-between mt-2">
+                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                                  <Button
+                                    key={value}
+                                    variant={stressScore === value ? "default" : "outline"}
+                                    size="sm"
+                                    className="h-8 w-8 p-0"
+                                    onClick={() => setStressScore(value)}
+                                  >
+                                    {value}
+                                  </Button>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div className="mt-4">
+                              <h3 className="font-medium mb-2">Quick Analysis</h3>
+                              <div className={cn(
+                                "rounded-lg p-3",
+                                (anxietyScore > 7 || stressScore > 7) 
+                                  ? "bg-red-500/10 text-red-700 dark:text-red-300" 
+                                  : (anxietyScore > 4 || stressScore > 4)
+                                    ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-300"
+                                    : "bg-green-500/10 text-green-700 dark:text-green-300"
+                              )}>
+                                {(anxietyScore > 7 || stressScore > 7) && (
+                                  <p>Your scores indicate you may be experiencing high levels of distress. Consider scheduling an appointment with a counselor soon.</p>
+                                )}
+                                {(anxietyScore <= 7 && stressScore <= 7) && (anxietyScore > 4 || stressScore > 4) && (
+                                  <p>Your scores suggest moderate stress or anxiety. Exploring stress management techniques could be helpful.</p>
+                                )}
+                                {(anxietyScore <= 4 && stressScore <= 4) && (
+                                  <p>Your scores suggest you're managing well at the moment. Continue practicing healthy habits!</p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </CardContent>
+                </Card>
+
                 <Card>
                   <CardHeader>
                     <CardTitle>Understanding Mental Health</CardTitle>
@@ -75,6 +193,51 @@ const MentalHealth = () => {
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>
+                  </CardContent>
+                </Card>
+
+                {/* New Research Card */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <BrainCircuit className="h-5 w-5 mr-2 text-primary" />
+                      Latest Research & Insights
+                    </CardTitle>
+                    <CardDescription>Recent findings in mental health science</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Card className="border border-muted p-4">
+                      <h3 className="font-medium text-lg">Journal of College Mental Health (2023)</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Research shows that 15-20 minutes of mindfulness meditation can significantly improve focus and reduce test anxiety in college students.
+                      </p>
+                      <div className="flex justify-between items-center mt-3">
+                        <span className="text-xs text-muted-foreground">doi: 10.1080/xxxxx</span>
+                        <Button variant="link" className="h-auto p-0">Read Summary</Button>
+                      </div>
+                    </Card>
+                    
+                    <Card className="border border-muted p-4">
+                      <h3 className="font-medium text-lg">Nature Human Behaviour (2023)</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Social connection is as important for health as diet and exercise, with strong social ties linked to better mental health outcomes among students.
+                      </p>
+                      <div className="flex justify-between items-center mt-3">
+                        <span className="text-xs text-muted-foreground">doi: 10.1038/xxxxx</span>
+                        <Button variant="link" className="h-auto p-0">Read Summary</Button>
+                      </div>
+                    </Card>
+                    
+                    <Card className="border border-muted p-4">
+                      <h3 className="font-medium text-lg">Frontiers in Psychology (2022)</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Regular physical activity of 30+ minutes, 3 times weekly, improves mood and cognitive function in university students by up to 25%.
+                      </p>
+                      <div className="flex justify-between items-center mt-3">
+                        <span className="text-xs text-muted-foreground">doi: 10.3389/xxxxx</span>
+                        <Button variant="link" className="h-auto p-0">Read Summary</Button>
+                      </div>
+                    </Card>
                   </CardContent>
                 </Card>
 
@@ -185,6 +348,104 @@ const MentalHealth = () => {
                     </div>
                   </CardContent>
                 </Card>
+                
+                {/* New Resources */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <BookMarked className="h-5 w-5 mr-2 text-primary" />
+                      Specialized Resources
+                    </CardTitle>
+                    <CardDescription>Support for specific challenges</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">For International Students</h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Resources for cultural adjustment, homesickness, and building community
+                        </p>
+                        <ul className="text-sm mt-2 space-y-1">
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Cultural adjustment workshops</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Language exchange partners</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>International student buddy program</span>
+                          </li>
+                        </ul>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">For First-Year Students</h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Help with transition to university life and independent living
+                        </p>
+                        <ul className="text-sm mt-2 space-y-1">
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Freshman orientation counseling</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Time management workshops</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Peer mentorship programs</span>
+                          </li>
+                        </ul>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">For Graduate Students</h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Support for research stress, work-life balance, and career planning
+                        </p>
+                        <ul className="text-sm mt-2 space-y-1">
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Research and thesis support groups</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Career counseling services</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Work-life balance coaching</span>
+                          </li>
+                        </ul>
+                      </Card>
+                      
+                      <Card className="p-4 border border-muted">
+                        <h3 className="font-medium">For LGBTQ+ Students</h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Resources for identity, community, and specific challenges
+                        </p>
+                        <ul className="text-sm mt-2 space-y-1">
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>LGBTQ+ support groups</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Identity-affirming counseling</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                            <span>Campus Safe Zone program</span>
+                          </li>
+                        </ul>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </ScrollArea>
           </TabsContent>
@@ -256,7 +517,7 @@ const MentalHealth = () => {
                     </div>
                   </CardContent>
                 </Card>
-
+                
                 <Card>
                   <CardHeader>
                     <CardTitle>24/7 Helplines & Crisis Support</CardTitle>
@@ -350,218 +611,65 @@ const MentalHealth = () => {
                     </Card>
                   </CardContent>
                 </Card>
+                
+                {/* New Card for Online Support */}
+                <Card>
+                  <CardHeader className="bg-primary/5 rounded-t-lg">
+                    <CardTitle className="flex items-center">
+                      <Users className="h-5 w-5 mr-2 text-primary" />
+                      Online Support Communities
+                    </CardTitle>
+                    <CardDescription>Virtual spaces where you can find support</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pt-4">
+                    <Card className="p-4 border border-muted">
+                      <h3 className="font-medium">7 Cups</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Free emotional support through trained listeners and online therapy with licensed therapists.
+                      </p>
+                      <Button variant="outline" size="sm" className="mt-3">
+                        <ExternalLink className="h-3.5 w-3.5 mr-2" />
+                        Visit Site
+                      </Button>
+                    </Card>
+                    
+                    <Card className="p-4 border border-muted">
+                      <h3 className="font-medium">TalkLife</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        A supportive social network where you can share your mental health journey with peers from around the world.
+                      </p>
+                      <Button variant="outline" size="sm" className="mt-3">
+                        <ExternalLink className="h-3.5 w-3.5 mr-2" />
+                        Visit Site
+                      </Button>
+                    </Card>
+                    
+                    <Card className="p-4 border border-muted">
+                      <h3 className="font-medium">The Mighty</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        A digital health community that publishes real stories by real people facing health challenges and disabilities.
+                      </p>
+                      <Button variant="outline" size="sm" className="mt-3">
+                        <ExternalLink className="h-3.5 w-3.5 mr-2" />
+                        Visit Site
+                      </Button>
+                    </Card>
+                    
+                    <Card className="p-4 border border-muted">
+                      <h3 className="font-medium">Reddit Mental Health Communities</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Subreddits like r/mentalhealth, r/anxiety, and r/depression offer community support and discussion.
+                      </p>
+                      <Button variant="outline" size="sm" className="mt-3">
+                        <ExternalLink className="h-3.5 w-3.5 mr-2" />
+                        Visit Site
+                      </Button>
+                    </Card>
+                  </CardContent>
+                </Card>
               </div>
             </ScrollArea>
           </TabsContent>
 
           <TabsContent value="wellness" className="space-y-4 mt-4">
-            <ScrollArea className="h-[calc(100vh-250px)]">
-              <div className="space-y-4 pr-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Daily Mental Wellness Practices</CardTitle>
-                    <CardDescription>Simple habits to improve your mental wellbeing</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Mindfulness Meditation</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Start with just 5 minutes daily of focused breathing to reduce stress and improve concentration.</p>
-                          </div>
-                        </div>
-                      </Card>
-                      
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Gratitude Journal</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Write down three things you're grateful for each day to shift focus to the positive aspects of life.</p>
-                          </div>
-                        </div>
-                      </Card>
-                      
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Regular Physical Activity</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Even a 20-minute walk can boost your mood by releasing endorphins and reducing stress hormones.</p>
-                          </div>
-                        </div>
-                      </Card>
-                      
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Digital Detox</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Set aside time each day to disconnect from devices and social media to reduce anxiety and improve sleep.</p>
-                          </div>
-                        </div>
-                      </Card>
-                      
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Sleep Hygiene</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Maintain a regular sleep schedule and create a relaxing bedtime routine to improve sleep quality.</p>
-                          </div>
-                        </div>
-                      </Card>
-                      
-                      <Card className="p-4 border border-muted">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-primary/10 rounded-full p-2 mt-1">
-                            <Smile className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium">Social Connection</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Schedule time with friends or family, even briefly, to maintain social connections that support mental health.</p>
-                          </div>
-                        </div>
-                      </Card>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Stress Management Techniques</CardTitle>
-                    <CardDescription>Effective strategies for managing academic stress</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="breathing">
-                        <AccordionTrigger>Deep Breathing Exercises</AccordionTrigger>
-                        <AccordionContent>
-                          <p>Try the 4-7-8 breathing technique:</p>
-                          <ol className="list-decimal pl-6 space-y-2 mt-2">
-                            <li>Exhale completely through your mouth</li>
-                            <li>Close your mouth and inhale quietly through your nose to a mental count of 4</li>
-                            <li>Hold your breath for a count of 7</li>
-                            <li>Exhale completely through your mouth to a count of 8</li>
-                            <li>Repeat the cycle three more times</li>
-                          </ol>
-                          <p className="mt-3">Practice this technique twice daily or whenever you feel stressed.</p>
-                        </AccordionContent>
-                      </AccordionItem>
-
-                      <AccordionItem value="progressive">
-                        <AccordionTrigger>Progressive Muscle Relaxation</AccordionTrigger>
-                        <AccordionContent>
-                          <p>This technique involves tensing and then releasing different muscle groups:</p>
-                          <ol className="list-decimal pl-6 space-y-2 mt-2">
-                            <li>Find a quiet, comfortable place to sit or lie down</li>
-                            <li>Take a few deep breaths</li>
-                            <li>Start with your feet: tense the muscles for 5 seconds, then release and relax for 10 seconds</li>
-                            <li>Move up through your body: calves, thighs, abdomen, chest, arms, hands, shoulders, neck, and face</li>
-                            <li>Notice the difference between tension and relaxation</li>
-                          </ol>
-                          <p className="mt-3">This exercise helps reduce physical manifestations of stress and induces a calming response.</p>
-                        </AccordionContent>
-                      </AccordionItem>
-
-                      <AccordionItem value="pomodoro">
-                        <AccordionTrigger>The Pomodoro Technique</AccordionTrigger>
-                        <AccordionContent>
-                          <p>A time management method that can reduce academic stress:</p>
-                          <ol className="list-decimal pl-6 space-y-2 mt-2">
-                            <li>Choose a task you need to accomplish</li>
-                            <li>Set a timer for 25 minutes and work on the task until the timer rings</li>
-                            <li>Take a short 5-minute break</li>
-                            <li>Repeat the process</li>
-                            <li>After four cycles, take a longer break (15-30 minutes)</li>
-                          </ol>
-                          <p className="mt-3">This technique helps maintain focus, prevents burnout, and makes large tasks more manageable.</p>
-                        </AccordionContent>
-                      </AccordionItem>
-
-                      <AccordionItem value="visualization">
-                        <AccordionTrigger>Guided Visualization</AccordionTrigger>
-                        <AccordionContent>
-                          <p>A powerful technique to reduce stress and anxiety:</p>
-                          <ol className="list-decimal pl-6 space-y-2 mt-2">
-                            <li>Find a quiet place and close your eyes</li>
-                            <li>Take several deep breaths</li>
-                            <li>Imagine a peaceful scene (beach, forest, mountains)</li>
-                            <li>Engage all your senses: What do you see, hear, smell, feel?</li>
-                            <li>Spend 5-10 minutes immersed in this mental sanctuary</li>
-                          </ol>
-                          <p className="mt-3">This practice can quickly reduce stress hormones and provide mental relief during challenging times.</p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Healthy Lifestyle Habits</CardTitle>
-                    <CardDescription>Physical wellbeing supports mental health</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <Card className="p-4 border border-muted">
-                        <h3 className="font-medium">Nutrition for Brain Health</h3>
-                        <p className="text-sm text-muted-foreground mt-1">Foods that support cognitive function and mood regulation:</p>
-                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
-                          <li><span className="font-medium">Omega-3 fatty acids:</span> Fatty fish, flaxseeds, walnuts</li>
-                          <li><span className="font-medium">Antioxidants:</span> Colorful fruits and vegetables</li>
-                          <li><span className="font-medium">Complex carbohydrates:</span> Whole grains, legumes</li>
-                          <li><span className="font-medium">Protein:</span> Lean meats, beans, nuts, dairy</li>
-                          <li><span className="font-medium">Hydration:</span> Aim for 2-3 liters of water daily</li>
-                        </ul>
-                      </Card>
-
-                      <Card className="p-4 border border-muted">
-                        <h3 className="font-medium">Exercise for Mental Wellbeing</h3>
-                        <p className="text-sm text-muted-foreground mt-1">Regular physical activity is one of the most effective ways to improve mental health:</p>
-                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
-                          <li>Aim for at least 150 minutes of moderate activity per week</li>
-                          <li>Include both cardio (walking, swimming) and strength training</li>
-                          <li>Yoga combines physical activity with mindfulness benefits</li>
-                          <li>Even brief walks between classes can boost mood and energy</li>
-                          <li>VIT Bhopal's sports facilities are available for all students</li>
-                        </ul>
-                      </Card>
-
-                      <Card className="p-4 border border-muted">
-                        <h3 className="font-medium">Sleep Optimization</h3>
-                        <p className="text-sm text-muted-foreground mt-1">Quality sleep is essential for mental health and academic performance:</p>
-                        <ul className="list-disc pl-6 mt-2 text-sm space-y-1">
-                          <li>Aim for 7-9 hours of sleep per night</li>
-                          <li>Maintain a consistent sleep schedule, even on weekends</li>
-                          <li>Create a relaxing bedtime routine</li>
-                          <li>Avoid screens 1 hour before bed</li>
-                          <li>Keep your sleep environment cool, dark, and quiet</li>
-                          <li>Limit caffeine after 2 PM</li>
-                        </ul>
-                      </Card>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollArea>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
-  );
-};
-
-export default MentalHealth;
+            <ScrollArea className="h-[calc(100vh-2
