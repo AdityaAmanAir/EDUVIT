@@ -17,12 +17,12 @@ const Profile = () => {
   
   // Mock user data
   const userData = {
-    name: "Rahul Kumar",
-    regNumber: "21BCE10042",
-    email: "rahul.kumar2021@vitbhopal.ac.in",
+    name: "Angad Madan",
+    regNumber: "24BAI10943",
+    email: "angad.24bai10943",
     role: "Student",
     department: "Computer Science",
-    yearOfStudy: "3rd Year",
+    yearOfStudy: "1st Year",
     bio: "Computer Science student interested in web development and artificial intelligence. Active member of the coding club and tech community.",
     subjects: ["Data Structures", "Computer Networks", "Database Management", "Web Development", "Machine Learning"],
     totalStudyHours: 245,
