@@ -13,6 +13,7 @@ import Learning from "./pages/Learning";
 import Gamification from "./pages/Gamification";
 import Assessment from "./pages/Assessment";
 import MentalHealth from "./pages/MentalHealth";
+import MentalWellbeing from "./pages/MentalWellbeing";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/gamification" element={<Gamification />} />
               <Route path="/assessment" element={<Assessment />} />
               <Route path="/mental-health" element={<MentalHealth />} />
+              <Route path="/mental-wellbeing" element={<MentalWellbeing />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />

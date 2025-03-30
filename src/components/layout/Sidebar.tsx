@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   Heart, 
   User, 
   Home,
+  Brain,
   X 
 } from "lucide-react";
 
@@ -43,6 +45,11 @@ const items = [
     title: "Mental Health",
     href: "/mental-health",
     icon: <Heart className="h-5 w-5" />,
+  },
+  {
+    title: "Mental Well-being",
+    href: "/mental-wellbeing",
+    icon: <Brain className="h-5 w-5" />,
   },
   {
     title: "Profile",
