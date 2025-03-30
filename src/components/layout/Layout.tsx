@@ -1,10 +1,14 @@
 
-import { Outlet } from "react-router-dom";
+import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 
-const Layout = () => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
   return (
@@ -20,7 +24,7 @@ const Layout = () => {
               className="w-full h-full object-cover object-center"
             />
           </div>
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
