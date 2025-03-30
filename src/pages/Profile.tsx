@@ -19,7 +19,7 @@ const Profile = () => {
   const userData = {
     name: "Angad Madan",
     regNumber: "24BAI10943",
-    email: "angad.24bai10943",
+    email: "angad.24bai10943@vitbhopal.ac.in",
     role: "Student",
     department: "Computer Science",
     yearOfStudy: "1st Year",
